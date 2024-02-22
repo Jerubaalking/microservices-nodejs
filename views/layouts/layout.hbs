@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="/css/styles.css"> <!-- Link to your Tailwind CSS file -->
+</head>
+<body class="font-sans bg-gray-100">
+
+  <!-- Navigation bar -->
+  {{> navigation}}
+
+
+  <!-- Body content -->
+  <div class="container mx-auto mt-20 p-8 my-8">
+    
+  <!-- Hero section with background image, heading, subheading, and button -->
+  <div class="bg-cover mb-10 bg-center h-96 flex items-center justify-center text-white">
+    <div class="text-center font-bold text-white"> hello
+    </div>
+  </div>
+  <div class="flex max-w-4xl m-12">
+    {{{body}}}
+  </div>
+  </div>
+
+</body>
+</html>

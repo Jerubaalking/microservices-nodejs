@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Apps and Tokens</title>
+</head>
+<body>
+    <h1>Show Apps and Tokens</h1>
+    <div id="appsList"></div>
+
+    <script>
+        // Retrieve user key from localStorage
+        const userKey = localStorage.getItem('userKey');
+
+        // Make AJAX request to fetch user apps
+        fetch('http://localhost:3000/show-apps', {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + userKey,
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            const appsList = document.getElementById('appsList');
+
+            if (data.userApps && data.userApps.length > 0) {
+                data.userApps.forEach(app => {
+                    const appInfo = document.createElement('div');
+                    appInfo.innerHTML = `<strong>App Name:</strong> ${app.appName}, <strong>App Key:</strong> ${app.appKey}`;
+                    appsList.appendChild(appInfo);
+                });
+            } else {
+                appsList.innerHTML = '<p>No apps found.</p>';
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    </script>
+</body>
+</html>

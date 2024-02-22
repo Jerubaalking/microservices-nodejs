@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log Action</title>
+</head>
+<body>
+    <h1>Log Action</h1>
+    <form id="logActionForm">
+        <label for="appName">App Name:</label>
+        <input type="text" id="appName" name="appName" required>
+
+        <label for="action">Action:</label>
+        <input type="text" id="action" name="action" required>
+
+        <button type="submit">Log Action</button>
+    </form>
+
+    <script>
+        document.getElementById('logActionForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const appName = document.getElementById('appName').value;
+            const action = document.getElementById('action').value;
+
+            // Get the user's token from localStorage or another secure storage
+            const userToken = 'your_user_token';
+
+            // Make AJAX request to log action
+            fetch('http://localhost:3000/log-action', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + userToken,
+                },
+                body: JSON.stringify({ appName, action }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>

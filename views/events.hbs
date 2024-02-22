@@ -1,0 +1,70 @@
+
+    <style>
+
+
+        .events-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            overflow: auto;
+        }
+
+
+        .events-container ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .events-container li {
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        .events-container li:hover {
+            background-color: #f9f9f9;
+        }
+    </style>
+    <div class="events-container">
+        <h1>Events List</h1>
+        <ul id="eventsList"></ul>
+    </div>
+
+    <script>
+        // Mock data for demonstration purposes
+         
+        fetch('/event-list', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }).then(response => response.json()).then(data => {
+           const mockEvents = data.events;
+            console.log(data, mockEvents);
+             const eventsListContainer = document.getElementById('eventsList');
+
+        mockEvents.forEach(event => {
+            const listItem = document.createElement('li');
+            if(event.data != null){
+                
+            data = JSON.parse(JSON.stringify(event.data));
+            data = JSON.parse(data);
+            console.log("event --->", data);
+            listItem.innerHTML = `
+                <strong>Action:</strong> ${data.action}<br>
+                <strong>Params:</strong> ${JSON.stringify(data.params)}<br>
+                <strong>Request:</strong> ${JSON.stringify(data.request)}
+            `;
+            eventsListContainer.appendChild(listItem);
+            }
+        });
+        });
+     
+
+        // Display events on the page
+       
+    </script>

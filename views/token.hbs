@@ -1,0 +1,51 @@
+<div class="container mx-auto mt-20 p-4">
+  <h1 class="text-3xl font-bold mb-4">App Token Request</h1>
+  <form id="appTokenRequestForm" class="max-w-md">
+    <div class="mb-4">
+      <label for="appName" class="block text-sm font-medium text-gray-600">App
+        Name:</label>
+      <input
+        type="text"
+        id="appName"
+        name="appName"
+        class="mt-1 p-2 border rounded-md w-full focus:outline-none focus:border-blue-500 focus:ring focus:ring-blue-200"
+        required
+      />
+    </div>
+
+    <div class="mb-4">
+      <label for="appKey" class="block text-sm font-medium text-gray-600">App
+        Key:</label>
+      <input
+        type="text"
+        id="appKey"
+        name="appKey"
+        class="mt-1 p-2 border rounded-md w-full focus:outline-none focus:border-blue-500 focus:ring focus:ring-blue-200"
+        required
+      />
+    </div>
+
+    <button
+      type="submit"
+      class="bg-color primary">
+      Get App Token
+    </button>
+  </form>
+</div>
+<!-- ... (previous code) -->
+
+<script>
+  document.getElementById('appTokenRequestForm').addEventListener('submit',
+  function(event) { event.preventDefault(); const appName =
+  document.getElementById('appName').value; const appKey =
+  document.getElementById('appKey').value; // Retrieve user key from
+  localStorage const userKey = localStorage.getItem('userKey'); // Make AJAX
+  request to get app token fetch('http://localhost:3000/get-app-token', {
+  method: 'POST', headers: { 'Content-Type': 'application/json',
+  'Authorization': 'Bearer ' + userKey, // Include user key in headers }, body:
+  JSON.stringify({ appName, appKey }), }) .then(response => response.json())
+  .then(data => { alert('App Token: ' + data.appToken); }) .catch(error => {
+  console.error('Error:', error); }); });
+</script>
+
+<!-- ... (remaining code) -->

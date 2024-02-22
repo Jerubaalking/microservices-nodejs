@@ -1,0 +1,45 @@
+<div class="flex py-8 mt-20" style="margin: 10px;">
+    
+    <title>Query Event Page</title>
+
+    <form id="queryForm">
+        <h1>Query Event Page</h1>
+
+        <label for="action">Action:</label>
+        <input type="text" id="action" name="action" required>
+
+        <label for="params">Params:</label>
+        <input type="text" id="params" name="params">
+
+        <label for="request">Request:</label>
+        <input type="text" id="request" name="request">
+
+        <button type="submit" class="bg-blue">Send Query</button>
+    </form>
+
+    <script>
+        document.getElementById('queryForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const action = document.getElementById('action').value;
+            const params = document.getElementById('params').value;
+            const request = document.getElementById('request').value;
+
+            // Make AJAX request to send the query
+            fetch('http://localhost:3000/query-event', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ action, params, request }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</div>
